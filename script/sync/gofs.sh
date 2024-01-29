@@ -120,10 +120,12 @@ function gofs_start_server() {
     -token_secret="$GOFS_TOKEN_SECERT"
 }
 
-function gofs_start_client() {
+function init_gofs_client_workspace() {
   mkdir -p /workspace/gofs/remote-disk-client/source /workspace/gofs/remote-disk-client/dest
   cp -n ./cert/cert.pem /workspace/gofs
+}
 
+function gofs_start_client() {
   ctr run -d --net-host \
     --mount=type=bind,src=/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
     $GOFS_IMAGE_NAME $GOFS_CONTAINER \
@@ -132,6 +134,17 @@ function gofs_start_client() {
     -dest="$WORKDIR/remote-disk-client/dest" \
     -users="$GOFS_USER" \
     -tls_cert_file=cert.pem
+}
+
+function gofs_start_client_sync_once() {
+  ctr run --rm --net-host \
+    --mount=type=bind,src=/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
+    $GOFS_IMAGE_NAME gofs_once \
+    gofs \
+    -source="rs://$GOFS_SERVER_ADDR:8105" \
+    -dest="$WORKDIR/remote-disk-client/dest" \
+    -users="$GOFS_USER" \
+    -tls_cert_file=cert.pem -sync_once
 }
 
 function gofs_show_state() {

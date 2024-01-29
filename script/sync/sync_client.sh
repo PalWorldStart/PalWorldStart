@@ -14,7 +14,11 @@ gofs_delete_task
 echo "删除容器"
 gofs_delete_container
 
-echo "启动gofs client"
+echo "初始化gofs client工作目录"
+init_gofs_client_workspace
+echo "执行一次全量同步"
+gofs_start_client_sync_once
+echo "开始监听服务器变更进行数据同步"
 gofs_start_client
 
 echo "查看状态"
