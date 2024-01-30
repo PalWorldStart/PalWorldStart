@@ -2,10 +2,38 @@
 
 Welcome to PalWorld!
 
+## 准备条件
+
+克隆本项目到本地
+
+```bash
+git clone https://github.com/PalWorldStart/PalWorldStart.git
+```
+
+然后进入脚本目录
+
+```bash
+cd PalWorldStart/script
+```
+
+赋予脚本执行权限
+
+```bash
+chmod +x *.sh
+```
+
+安装containerd
+
+```bash
+cd containerd
+chmod +x install_containerd.sh
+./install_containerd.sh
+cd ../
+```
+
 ## 安装PalWorld服务器
 
 ```bash
-chmod +x ./*.sh
 ./install_pal.sh
 ```
 
