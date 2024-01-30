@@ -26,11 +26,11 @@ chmod +x ./*.sh
 运行时配置文件
 
 ```text
-/workspace/palworld/data/steamapps/common/PalServer/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
+~/workspace/palworld/data/steamapps/common/PalServer/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
 ```
 
 默认配置文件模板
 
 ```text
-/workspace/palworld/data/steamapps/common/PalServer/DefaultPalWorldSettings.ini
+~/workspace/palworld/data/steamapps/common/PalServer/DefaultPalWorldSettings.ini
 ```

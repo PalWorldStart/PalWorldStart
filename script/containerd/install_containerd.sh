@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-mkdir -p /workspace/containerd
-cd /workspace/containerd
+mkdir -p ~/workspace/containerd
+cd ~/workspace/containerd
 echo "开始下载containerd"
 wget https://github.com/containerd/containerd/releases/download/v1.7.12/containerd-1.7.12-linux-amd64.tar.gz
 echo "开始下载nerdctl"

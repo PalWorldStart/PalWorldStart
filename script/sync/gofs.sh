@@ -6,7 +6,7 @@ GOFS_VERSION=latest
 GOFS_CONTAINER=gofs
 GOFS_IMAGE_NAME="docker.io/nosrc/gofs:$GOFS_VERSION"
 
-WORKDIR=/workspace
+WORKDIR=~/workspace
 
 # 获取当前task的状态
 function gofs_image_exist() {
@@ -104,12 +104,12 @@ function gofs_delete_container() {
 }
 
 function gofs_start_server() {
-  mkdir -p /workspace/gofs/remote-disk-server/dest
-  cp -n ./cert/* /workspace/gofs
+  mkdir -p ~/workspace/gofs/remote-disk-server/dest
+  cp -n ./cert/* ~/workspace/gofs
 
   ctr run -d --net-host \
-    --mount=type=bind,src=/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
-    --mount=type=bind,src=/workspace/palworld/data/steamapps/common/PalServer/Pal/Saved,dst=$WORKDIR/remote-disk-server/source,options=rbind:rw \
+    --mount=type=bind,src=~/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
+    --mount=type=bind,src=~/workspace/palworld/data/steamapps/common/PalServer/Pal/Saved,dst=$WORKDIR/remote-disk-server/source,options=rbind:rw \
     $GOFS_IMAGE_NAME $GOFS_CONTAINER \
     gofs \
     -source="rs://$GOFS_SERVER_ADDR:8105?mode=server&local_sync_disabled=true&path=$WORKDIR/remote-disk-server/source&fs_server=https://$GOFS_SERVER_ADDR" \
@@ -121,13 +121,13 @@ function gofs_start_server() {
 }
 
 function init_gofs_client_workspace() {
-  mkdir -p /workspace/gofs/remote-disk-client/source /workspace/gofs/remote-disk-client/dest
-  cp -n ./cert/cert.pem /workspace/gofs
+  mkdir -p ~/workspace/gofs/remote-disk-client/source ~/workspace/gofs/remote-disk-client/dest
+  cp -n ./cert/cert.pem ~/workspace/gofs
 }
 
 function gofs_start_client() {
   ctr run -d --net-host \
-    --mount=type=bind,src=/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
+    --mount=type=bind,src=~/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
     $GOFS_IMAGE_NAME $GOFS_CONTAINER \
     gofs \
     -source="rs://$GOFS_SERVER_ADDR:8105" \
@@ -138,7 +138,7 @@ function gofs_start_client() {
 
 function gofs_start_client_sync_once() {
   ctr run --rm --net-host \
-    --mount=type=bind,src=/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
+    --mount=type=bind,src=~/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
     $GOFS_IMAGE_NAME gofs_once \
     gofs \
     -source="rs://$GOFS_SERVER_ADDR:8105" \
