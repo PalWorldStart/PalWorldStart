@@ -1,0 +1,23 @@
+name: PalWorld
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    strategy:
+      matrix:
+        os: [ 'ubuntu-latest' ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Containerd
+        run: chmod +x ./scripts/containerd/install_containerd.sh && ./scripts/containerd/install_containerd.sh
+
+      - name: Install PalWorld
+        run: chmod +x ./scripts/*.sh && ./scripts/install_pal.sh
