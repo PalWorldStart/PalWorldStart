@@ -21,3 +21,9 @@ jobs:
 
       - name: Install PalWorld
         run: chmod +x ./script/*.sh && ./script/install_pal.sh
+
+      - name: Install Sync Server
+        run: chmod +x ./script/sync/*.sh && ./script/sync/sync_server.sh
+
+      - name: Install Sync Client
+        run: ./script/sync/sync_client.sh
