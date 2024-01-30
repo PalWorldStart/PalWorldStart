@@ -7,7 +7,7 @@ STEAMCMD_IMAGE_NAME="docker.io/cm2network/steamcmd:$STEAMCMD_VERSION"
 
 # 获取当前task的状态
 function steamcmd_image_exist() {
-  if [ "$STEAMCMD_IMAGE_NAME" = "$(ctr image ls | grep $STEAMCMD_IMAGE_NAME | awk '{print $1}')" ]; then
+  if [ "$STEAMCMD_IMAGE_NAME" = "$(sudo ctr image ls | grep $STEAMCMD_IMAGE_NAME | awk '{print $1}')" ]; then
     return 0
   else
     return 1
@@ -16,12 +16,12 @@ function steamcmd_image_exist() {
 
 # 获取当前task的状态
 function get_task_status() {
-  ctr t ls | grep $STEAMCMD_CONTAINER | awk '{print $3}'
+  sudo ctr t ls | grep $STEAMCMD_CONTAINER | awk '{print $3}'
 }
 
 # 检查task是否存在
 function steamcmd_task_exist() {
-  if [ "$STEAMCMD_CONTAINER" = "$(ctr t ls | grep $STEAMCMD_CONTAINER | awk '{print $1}')" ]; then
+  if [ "$STEAMCMD_CONTAINER" = "$(sudo ctr t ls | grep $STEAMCMD_CONTAINER | awk '{print $1}')" ]; then
     return 0
   else
     return 1
@@ -30,7 +30,7 @@ function steamcmd_task_exist() {
 
 # 检查container是否存在
 function steamcmd_container_exist() {
-  if [ "$STEAMCMD_CONTAINER" = "$(ctr c ls | grep $STEAMCMD_CONTAINER | awk '{print $1}')" ]; then
+  if [ "$STEAMCMD_CONTAINER" = "$(sudo ctr c ls | grep $STEAMCMD_CONTAINER | awk '{print $1}')" ]; then
     return 0
   else
     return 1
@@ -42,7 +42,7 @@ function steamcmd_pull_image() {
   if steamcmd_image_exist; then
     echo "$STEAMCMD_IMAGE_NAME镜像已存在"
   else
-    ctr image pull $STEAMCMD_IMAGE_NAME
+    sudo ctr image pull $STEAMCMD_IMAGE_NAME
   fi
 }
 
@@ -51,7 +51,7 @@ function steamcmd_stop_task() {
 
   # 停止正在运行的task
   if [ "RUNNING" = "$STEAMCMD_TASK_STATUS" ]; then
-    ctr t kill -s 9 $STEAMCMD_CONTAINER
+    sudo ctr t kill -s 9 $STEAMCMD_CONTAINER
 
     # 如果120s内task仍未退出则结束脚本
     for i in {1..120}; do
@@ -73,13 +73,13 @@ function steamcmd_stop_task() {
 
 # 启动task
 function steamcmd_start_task() {
-  ctr t start -d $STEAMCMD_CONTAINER
+  sudo ctr t start -d $STEAMCMD_CONTAINER
 }
 
 # 删除task
 function steamcmd_delete_task() {
   if steamcmd_task_exist; then
-    ctr t rm $STEAMCMD_CONTAINER
+    sudo ctr t rm $STEAMCMD_CONTAINER
 
     if steamcmd_task_exist; then
       echo "无法删除task==> $STEAMCMD_CONTAINER"
@@ -91,7 +91,7 @@ function steamcmd_delete_task() {
 # 删除容器
 function steamcmd_delete_container() {
   if steamcmd_container_exist; then
-    ctr c rm $STEAMCMD_CONTAINER
+    sudo ctr c rm $STEAMCMD_CONTAINER
 
     if steamcmd_container_exist; then
       echo "无法删除container==> $STEAMCMD_CONTAINER"
@@ -101,26 +101,26 @@ function steamcmd_delete_container() {
 }
 
 function steamcmd_start() {
-  ctr run -d --net-host \
+  sudo ctr run -d --net-host \
     --mount=type=bind,src=~/workspace/palworld/data/steamapps,dst=/home/steam/Steam/steamapps,options=rbind:rw \
     $STEAMCMD_IMAGE_NAME $STEAMCMD_CONTAINER
 }
 
 function steamcmd_show_state() {
   echo "【$STEAMCMD_CONTAINER($STEAMCMD_VERSION)】当前状态："
-  ctr t ls | grep $STEAMCMD_CONTAINER
-  ctr c ls | grep $STEAMCMD_CONTAINER
+  sudo ctr t ls | grep $STEAMCMD_CONTAINER
+  sudo ctr c ls | grep $STEAMCMD_CONTAINER
 }
 
 # 启动PalWorld
 function palworld_start() {
-  ctr t exec -d --exec-id restart_pal -t steamcmd /bin/bash -c "/home/steam/Steam/steamapps/common/PalServer/PalServer.sh"
+  sudo ctr t exec -d --exec-id restart_pal -t steamcmd /bin/bash -c "/home/steam/Steam/steamapps/common/PalServer/PalServer.sh"
 }
 
 function steamcmd_exec() {
-  ctr tasks exec --exec-id steamcmd_exec -t steamcmd /bin/bash
+  sudo ctr tasks exec --exec-id steamcmd_exec -t steamcmd /bin/bash
 }
 
 function palworld_update() {
-  ctr tasks exec --exec-id update_pal -t steamcmd /bin/bash -c "/home/steam/steamcmd/steamcmd.sh +login anonymous +app_update 2394010 validate +quit"
+  sudo ctr tasks exec --exec-id update_pal -t steamcmd /bin/bash -c "/home/steam/steamcmd/steamcmd.sh +login anonymous +app_update 2394010 validate +quit"
 }
