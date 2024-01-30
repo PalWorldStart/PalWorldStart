@@ -17,13 +17,13 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Containerd
-        run: chmod +x ./script/containerd/install_containerd.sh && ./script/containerd/install_containerd.sh
+        run: cd ./script/containerd && chmod +x install_containerd.sh && ./install_containerd.sh
 
       - name: Install PalWorld
-        run: chmod +x ./script/*.sh && ./script/install_pal.sh
+        run: cd ./script && chmod +x *.sh && ./install_pal.sh
 
       - name: Install Sync Server
-        run: chmod +x ./script/sync/*.sh && ./script/sync/sync_server.sh
+        run: cd ./script/sync && chmod +x *.sh && ./sync_server.sh
 
       - name: Install Sync Client
-        run: ./script/sync/sync_client.sh
+        run: cd ./script/sync && ./sync_client.sh
