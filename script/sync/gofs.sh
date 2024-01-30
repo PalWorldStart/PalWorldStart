@@ -6,7 +6,7 @@ GOFS_VERSION=latest
 GOFS_CONTAINER=gofs
 GOFS_IMAGE_NAME="docker.io/nosrc/gofs:$GOFS_VERSION"
 
-WORKDIR=~/workspace
+WORKDIR=/workspace
 
 # 获取当前task的状态
 function gofs_image_exist() {
