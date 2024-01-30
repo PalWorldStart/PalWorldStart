@@ -108,8 +108,8 @@ function gofs_start_server() {
   cp -n ./cert/* ~/workspace/gofs
 
   sudo ctr run -d --net-host \
-    --mount=type=bind,src=~/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
-    --mount=type=bind,src=~/workspace/palworld/data/steamapps/common/PalServer/Pal/Saved,dst=$WORKDIR/remote-disk-server/source,options=rbind:rw \
+    --mount=type=bind,src=$(HOME)/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
+    --mount=type=bind,src=$(HOME)/workspace/palworld/data/steamapps/common/PalServer/Pal/Saved,dst=$WORKDIR/remote-disk-server/source,options=rbind:rw \
     $GOFS_IMAGE_NAME $GOFS_CONTAINER \
     gofs \
     -source="rs://$GOFS_SERVER_ADDR:8105?mode=server&local_sync_disabled=true&path=$WORKDIR/remote-disk-server/source&fs_server=https://$GOFS_SERVER_ADDR" \
@@ -127,7 +127,7 @@ function init_gofs_client_workspace() {
 
 function gofs_start_client() {
   sudo ctr run -d --net-host \
-    --mount=type=bind,src=~/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
+    --mount=type=bind,src=$(HOME)/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
     $GOFS_IMAGE_NAME $GOFS_CONTAINER \
     gofs \
     -source="rs://$GOFS_SERVER_ADDR:8105" \
@@ -138,7 +138,7 @@ function gofs_start_client() {
 
 function gofs_start_client_sync_once() {
   sudo ctr run --rm --net-host \
-    --mount=type=bind,src=~/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
+    --mount=type=bind,src=$(HOME)/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
     $GOFS_IMAGE_NAME gofs_once \
     gofs \
     -source="rs://$GOFS_SERVER_ADDR:8105" \

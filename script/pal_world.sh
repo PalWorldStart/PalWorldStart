@@ -102,7 +102,7 @@ function steamcmd_delete_container() {
 
 function steamcmd_start() {
   sudo ctr run -d --net-host \
-    --mount=type=bind,src=~/workspace/palworld/data/steamapps,dst=/home/steam/Steam/steamapps,options=rbind:rw \
+    --mount=type=bind,src=$(HOME)/workspace/palworld/data/steamapps,dst=/home/steam/Steam/steamapps,options=rbind:rw \
     $STEAMCMD_IMAGE_NAME $STEAMCMD_CONTAINER
 }
 
