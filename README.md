@@ -37,16 +37,22 @@ cd ../
 ./install_pal.sh
 ```
 
-## 重启PalWorld服务器
-
-```bash
-./restart_pal.sh
-```
+安装完毕后，使用IP+8211端口进行访问即可，例如：`127.0.0.1:8211`
 
 ## 更新PalWorld服务器
 
+通过以下命令来更新服务器到最新版本
+
 ```bash
 ./update_pal.sh
+```
+
+## 重启PalWorld服务器
+
+服务器内存过高或者修改完配置文件后，可以执行以下命令来重启服务器
+
+```bash
+./restart_pal.sh
 ```
 
 ## 配置文件
