@@ -3,15 +3,15 @@
 mkdir -p ~/workspace/containerd
 cd ~/workspace/containerd
 echo "开始下载containerd"
-wget https://github.com/containerd/containerd/releases/download/v1.7.12/containerd-1.7.12-linux-amd64.tar.gz
+wget -q https://github.com/containerd/containerd/releases/download/v1.7.12/containerd-1.7.12-linux-amd64.tar.gz
 echo "开始下载nerdctl"
-wget https://github.com/containerd/nerdctl/releases/download/v1.7.2/nerdctl-1.7.2-linux-amd64.tar.gz
+wget -q https://github.com/containerd/nerdctl/releases/download/v1.7.2/nerdctl-1.7.2-linux-amd64.tar.gz
 echo "开始下载containerd.service"
-wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+wget -q https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
 echo "开始下载runc"
-wget https://github.com/opencontainers/runc/releases/download/v1.1.11/runc.amd64
+wget -q https://github.com/opencontainers/runc/releases/download/v1.1.11/runc.amd64
 echo "开始下载cni-plugins"
-wget https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni-plugins-linux-amd64-v1.4.0.tgz
+wget -q https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni-plugins-linux-amd64-v1.4.0.tgz
 
 echo "开始安装containerd"
 tar Cxzvf /usr/local containerd-1.7.12-linux-amd64.tar.gz
