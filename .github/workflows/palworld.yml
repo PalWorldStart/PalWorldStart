@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Containerd
-        run: chmod +x ./scripts/containerd/install_containerd.sh && ./scripts/containerd/install_containerd.sh
+        run: chmod +x ./script/containerd/install_containerd.sh && ./script/containerd/install_containerd.sh
 
       - name: Install PalWorld
-        run: chmod +x ./scripts/*.sh && ./scripts/install_pal.sh
+        run: chmod +x ./script/*.sh && ./script/install_pal.sh
