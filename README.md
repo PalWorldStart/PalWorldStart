@@ -68,3 +68,7 @@ cd ../
 ```text
 /workspace/palworld/data/steamapps/common/PalServer/DefaultPalWorldSettings.ini
 ```
+
+## 存档同步备份
+
+如果想要对游戏的存档数据进行实时同步备份，可以参照[存档同步备份](Sync.md)文档进行操作
