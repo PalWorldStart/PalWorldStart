@@ -34,7 +34,7 @@ sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v$CNI_PLUGINS_VERSION.tgz
 echo "开始生成containerd默认配置文件"
 if [ -d "/etc/containerd" ]; then
   CONTAINERD_BACKUP=containerd_bak_$(date +%Y%m%d%H%M%S).tar.gz
-  cd /etc && sudo tar -zcvf $CONTAINERD_BACKUP containerd && cd - && mv /etc/$CONTAINERD_BACKUP .
+  cd /etc && sudo tar -zcvf $CONTAINERD_BACKUP containerd && cd - && sudo mv /etc/$CONTAINERD_BACKUP .
 else
   sudo mkdir -p /etc/containerd
 fi
