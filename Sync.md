@@ -44,7 +44,7 @@ chmod +x *.sh
 在PalWorld的服务端启动同步服务器
 
 ```bash
-./sync_server.sh
+./start_server.sh
 ```
 
 ### 启动同步程序的客户端
@@ -52,7 +52,7 @@ chmod +x *.sh
 在另一台用于数据备份的主机中启动同步客户端
 
 ```bash
-./sync_client.sh
+./start_client.sh
 ```
 
 执行完毕，就可以将PalWorld服务器上的`/workspace/palworld/data/steamapps/common/PalServer/Pal/Saved`目录下的文件，
