@@ -5,6 +5,8 @@ NERDCTL_VERSION=1.7.3
 RUNC_VERSION=1.1.12
 CNI_PLUGINS_VERSION=1.4.0
 
+set -e
+
 echo "开始下载containerd v$CONTAINERD_VERSION"
 wget -nc -q https://github.com/containerd/containerd/releases/download/v$CONTAINERD_VERSION/containerd-$CONTAINERD_VERSION-linux-amd64.tar.gz
 echo "开始下载nerdctl v$NERDCTL_VERSION"
