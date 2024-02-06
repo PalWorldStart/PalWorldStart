@@ -114,6 +114,7 @@ function gofs_start_server() {
     gofs \
     -source="rs://$GOFS_SERVER_ADDR:8105?mode=server&local_sync_disabled=true&path=$WORKDIR/remote-disk-server/source&fs_server=https://$GOFS_SERVER_ADDR" \
     -dest="$WORKDIR/remote-disk-server/dest" \
+    -log_level=0 \
     -users="$GOFS_USER" \
     -tls_cert_file=cert.pem \
     -tls_key_file=key.pem \
@@ -132,6 +133,7 @@ function gofs_start_client() {
     gofs \
     -source="rs://$GOFS_SERVER_ADDR:8105" \
     -dest="$WORKDIR/remote-disk-client/dest" \
+    -log_level=0 \
     -users="$GOFS_USER" \
     -tls_cert_file=cert.pem
 }
@@ -143,6 +145,7 @@ function gofs_start_client_sync_once() {
     gofs \
     -source="rs://$GOFS_SERVER_ADDR:8105" \
     -dest="$WORKDIR/remote-disk-client/dest" \
+    -log_level=0 \
     -users="$GOFS_USER" \
     -tls_cert_file=cert.pem -sync_once
 }
