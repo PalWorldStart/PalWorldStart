@@ -6,15 +6,15 @@ RUNC_VERSION=1.1.12
 CNI_PLUGINS_VERSION=1.4.0
 
 echo "开始下载containerd v$CONTAINERD_VERSION"
-wget -ncq https://github.com/containerd/containerd/releases/download/v$CONTAINERD_VERSION/containerd-$CONTAINERD_VERSION-linux-amd64.tar.gz
+wget -nc -q https://github.com/containerd/containerd/releases/download/v$CONTAINERD_VERSION/containerd-$CONTAINERD_VERSION-linux-amd64.tar.gz
 echo "开始下载nerdctl v$NERDCTL_VERSION"
-wget -ncq https://github.com/containerd/nerdctl/releases/download/v$NERDCTL_VERSION/nerdctl-$NERDCTL_VERSION-linux-amd64.tar.gz
+wget -nc -q https://github.com/containerd/nerdctl/releases/download/v$NERDCTL_VERSION/nerdctl-$NERDCTL_VERSION-linux-amd64.tar.gz
 echo "开始下载containerd.service"
-wget -ncq https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+wget -nc -q https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
 echo "开始下载runc v$RUNC_VERSION"
-wget -ncq https://github.com/opencontainers/runc/releases/download/v$RUNC_VERSION/runc.amd64
+wget -nc -q https://github.com/opencontainers/runc/releases/download/v$RUNC_VERSION/runc.amd64
 echo "开始下载cni-plugins v$CNI_PLUGINS_VERSION"
-wget -ncq https://github.com/containernetworking/plugins/releases/download/v$CNI_PLUGINS_VERSION/cni-plugins-linux-amd64-v$CNI_PLUGINS_VERSION.tgz
+wget -nc -q https://github.com/containernetworking/plugins/releases/download/v$CNI_PLUGINS_VERSION/cni-plugins-linux-amd64-v$CNI_PLUGINS_VERSION.tgz
 
 echo "开始安装containerd v$CONTAINERD_VERSION"
 sudo tar Cxzvf /usr/local containerd-$CONTAINERD_VERSION-linux-amd64.tar.gz
