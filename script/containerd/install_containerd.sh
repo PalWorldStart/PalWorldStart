@@ -33,11 +33,12 @@ sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v$CNI_PLUGINS_VERSION.tgz
 
 echo "开始生成containerd默认配置文件"
 if [ -d "/etc/containerd" ]; then
-  sudo tar -zcvf containerd_bak_$(date +%Y%m%d%H%M%S).tar.gz /etc/containerd
+  CONTAINERD_BACKUP=containerd_bak_$(date +%Y%m%d%H%M%S).tar.gz
+  cd /etc && sudo tar -zcvf $CONTAINERD_BACKUP containerd && cd - && mv /etc/$CONTAINERD_BACKUP .
 else
   sudo mkdir -p /etc/containerd
 fi
-containerd config default | sudo tee /etc/containerd/config.toml
+containerd config default | sudo tee /etc/containerd/config.toml >/dev/null
 sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
 
 echo "重启containerd"
@@ -45,3 +46,4 @@ sudo systemctl restart containerd
 
 containerd -v
 echo "containerd安装结束"
+ls -alh
