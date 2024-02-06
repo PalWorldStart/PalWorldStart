@@ -33,7 +33,7 @@ sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v$CNI_PLUGINS_VERSION.tgz
 
 echo "开始生成containerd默认配置文件"
 mkdir -p /etc/containerd
-sudo containerd config default >/etc/containerd/config.toml
+containerd config default >/etc/containerd/config.toml
 
 sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
 
