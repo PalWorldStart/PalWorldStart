@@ -48,4 +48,10 @@ sudo systemctl restart containerd
 
 containerd -v
 echo "containerd安装结束"
-ls -alh
+
+for file in *; do
+  if [ -f "$file" ]; then
+    md5=$(md5sum "$file" | awk '{ print $1 }')
+    ls -alh "$file" | awk -v md5="$md5" '{ print md5, $0 }'
+  fi
+done
