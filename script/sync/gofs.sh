@@ -108,6 +108,7 @@ function gofs_start_server() {
   cp -n ./cert/* /workspace/gofs
 
   ctr run -d --net-host \
+    -e TZ=Asia/Shanghai \
     --mount=type=bind,src=/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
     --mount=type=bind,src=/workspace/palworld/data/steamapps/common/PalServer/Pal/Saved,dst=$WORKDIR/remote-disk-server/source,options=rbind:rw \
     $GOFS_IMAGE_NAME $GOFS_CONTAINER \
@@ -128,6 +129,7 @@ function init_gofs_client_workspace() {
 
 function gofs_start_client() {
   ctr run -d --net-host \
+    -e TZ=Asia/Shanghai \
     --mount=type=bind,src=/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
     $GOFS_IMAGE_NAME $GOFS_CONTAINER \
     gofs \
@@ -140,6 +142,7 @@ function gofs_start_client() {
 
 function gofs_start_client_sync_once() {
   ctr run --rm --net-host \
+    -e TZ=Asia/Shanghai \
     --mount=type=bind,src=/workspace/gofs,dst=$WORKDIR,options=rbind:rw \
     $GOFS_IMAGE_NAME gofs_once \
     gofs \
