@@ -17,4 +17,4 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Containerd
-        run: cd ./script/containerd && chmod +x install_containerd.sh && sudo ./install_containerd.sh
+        run: cd ./script/containerd && chmod +x install_containerd.sh && ./install_containerd.sh
