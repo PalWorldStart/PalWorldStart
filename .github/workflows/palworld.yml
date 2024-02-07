@@ -20,7 +20,7 @@ jobs:
         run: cd ./script/containerd && chmod +x install_containerd.sh && ./install_containerd.sh
 
       - name: Add Swap
-        run: cd ./script/swap && chmod +x ./script/swap/add_swap.sh && ./add_swap.sh
+        run: cd ./script/swap && chmod +x add_swap.sh && ./add_swap.sh
 
       - name: Remove Swap
-        run: cd ./script/swap && chmod +x ./script/swap/remove_swap.sh && ./remove_swap.sh
+        run: cd ./script/swap && chmod +x remove_swap.sh && ./remove_swap.sh
