@@ -72,3 +72,23 @@ cd ../
 ## 存档同步备份
 
 如果想要对游戏的存档数据进行实时同步备份，可以参照[存档同步备份](Sync.md)文档进行操作
+
+## 虚拟内存
+
+### 启用虚拟内存
+
+如果你的服务器内存不是很充裕，可以使用以下命令启用虚拟内存来缓解内存压力
+
+```bash
+cd PalWorldStart/script/swap
+./add_swap.sh
+```
+
+### 禁用虚拟内存
+
+使用以下命令可以删除上述添加的虚拟内存
+
+```bash
+cd PalWorldStart/script/swap
+./remove_swap.sh
+```
