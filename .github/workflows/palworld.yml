@@ -14,7 +14,7 @@ jobs:
         os: [ 'ubuntu-latest' ]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install Containerd
         run: cd ./script/containerd && chmod +x install_containerd.sh && ./install_containerd.sh
